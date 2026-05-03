@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jackie Studio — Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <!-- Login -->
+  <div class="login-wrapper" id="loginWrapper">
+    <div class="login-card">
+      <h1>Jackie Studio</h1>
+      <p>Enter your GitHub token to manage your site</p>
+      <form id="loginForm">
+        <input type="password" id="tokenInput" placeholder="ghp_xxxxxxxxxxxx" autocomplete="off" required>
+        <button type="submit" class="btn btn-primary" id="loginBtn">Login</button>
+      </form>
+      <p style="margin-top:1rem;font-size:0.78rem;color:var(--text-light)">
+        Need a token? Go to GitHub → Settings → Developer settings → Personal access tokens → Generate new token (classic). Check the <strong>repo</strong> scope.
+      </p>
+    </div>
+  </div>
+
+  <!-- App -->
+  <div class="app-wrapper" id="appWrapper">
+
+    <!-- Header -->
+    <header class="admin-header">
+      <h1>Jackie Studio Admin</h1>
+      <button class="btn btn-secondary btn-sm" id="logoutBtn">Logout</button>
+    </header>
+
+    <!-- Dashboard -->
+    <div class="editor-page active" id="page-dashboard">
+      <div class="dashboard">
+        <h2>Manage Your Site</h2>
+        <div class="section-cards">
+          <div class="section-card" data-navigate="gallery">
+            <div class="section-card-icon">🖼</div>
+            <div class="section-card-info">
+              <h3>Gallery</h3>
+              <p>Upload art, drawings, fashion designs</p>
+            </div>
+          </div>
+          <div class="section-card" data-navigate="videos">
+            <div class="section-card-icon">🎬</div>
+            <div class="section-card-info">
+              <h3>Videos</h3>
+              <p>Add YouTube videos and edits</p>
+            </div>
+          </div>
+          <div class="section-card" data-navigate="about">
+            <div class="section-card-icon">✏️</div>
+            <div class="section-card-info">
+              <h3>About Me</h3>
+              <p>Edit your bio and intro text</p>
+            </div>
+          </div>
+          <div class="section-card" data-navigate="personal">
+            <div class="section-card-icon">💕</div>
+            <div class="section-card-info">
+              <h3>My Life</h3>
+              <p>Dog photos, stories, personal cards</p>
+            </div>
+          </div>
+          <div class="section-card" data-navigate="social">
+            <div class="section-card-icon">🔗</div>
+            <div class="section-card-info">
+              <h3>Social Links</h3>
+              <p>YouTube and WhatsApp links</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gallery Editor -->
+    <div class="editor-page" id="page-gallery">
+      <div class="editor-header">
+        <button class="back-btn">←</button>
+        <h2>Gallery</h2>
+      </div>
+      <button class="btn btn-secondary" id="addGalleryBtn" style="margin-bottom:1rem;width:100%">+ Add New Item</button>
+      <div id="galleryList"></div>
+      <div class="save-bar">
+        <button class="btn btn-primary" id="saveGalleryBtn" style="width:100%">Save Gallery</button>
+      </div>
+    </div>
+
+    <!-- Videos Editor -->
+    <div class="editor-page" id="page-videos">
+      <div class="editor-header">
+        <button class="back-btn">←</button>
+        <h2>Videos</h2>
+      </div>
+      <button class="btn btn-secondary" id="addVideoBtn" style="margin-bottom:1rem;width:100%">+ Add New Video</button>
+      <div id="videosList"></div>
+      <div class="save-bar">
+        <button class="btn btn-primary" id="saveVideosBtn" style="width:100%">Save Videos</button>
+      </div>
+    </div>
+
+    <!-- About Editor -->
+    <div class="editor-page" id="page-about">
+      <div class="editor-header">
+        <button class="back-btn">←</button>
+        <h2>About Me</h2>
+      </div>
+      <button class="btn btn-secondary" id="addAboutBtn" style="margin-bottom:1rem;width:100%">+ Add Paragraph</button>
+      <div id="aboutList"></div>
+      <div class="save-bar">
+        <button class="btn btn-primary" id="saveAboutBtn" style="width:100%">Save About</button>
+      </div>
+    </div>
+
+    <!-- Personal Editor -->
+    <div class="editor-page" id="page-personal">
+      <div class="editor-header">
+        <button class="back-btn">←</button>
+        <h2>My Life</h2>
+      </div>
+      <button class="btn btn-secondary" id="addPersonalBtn" style="margin-bottom:1rem;width:100%">+ Add New Card</button>
+      <div id="personalList"></div>
+      <div class="save-bar">
+        <button class="btn btn-primary" id="savePersonalBtn" style="width:100%">Save My Life</button>
+      </div>
+    </div>
+
+    <!-- Social Editor -->
+    <div class="editor-page" id="page-social">
+      <div class="editor-header">
+        <button class="back-btn">←</button>
+        <h2>Social Links</h2>
+      </div>
+      <div class="form-group">
+        <label>YouTube Channel URL</label>
+        <input type="url" id="socialYoutube" placeholder="https://youtube.com/@yourchannel">
+      </div>
+      <div class="form-group">
+        <label>WhatsApp Link</label>
+        <input type="url" id="socialWhatsapp" placeholder="https://wa.me/...">
+      </div>
+      <div class="save-bar">
+        <button class="btn btn-primary" id="saveSocialBtn" style="width:100%">Save Links</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Toasts -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

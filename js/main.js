@@ -1,9 +1,7 @@
 /* Jackie Studio — Main JavaScript */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initScrollAnimations();
   initNavbar();
-  initLightbox();
 });
 
 /* --- Scroll Animations (IntersectionObserver) --- */
