@@ -1,27 +1,82 @@
 {
   "about": {
     "paragraphs": [
-      "Hey! I'm Jackie — I'm 11 years old and I love creating things.",
-      "Whether I'm drawing, designing outfits, editing videos, or playing tennis with my dog watching from the sidelines — I'm always up to something fun.",
+      "Hey! I'm Jackie â I'm 11 years old and I love creating things.",
+      "Whether I'm drawing, designing outfits, editing videos, or playing tennis with my dog watching from the sidelines â I'm always up to something fun.",
       "This is my little corner of the internet where I share all the stuff I make and do. Take a look around!"
     ]
   },
   "gallery": [
-    { "id": "1", "image": "", "caption": "My Drawing", "category": "Drawing" },
-    { "id": "2", "image": "", "caption": "Fashion Design", "category": "Fashion" },
-    { "id": "3", "image": "", "caption": "Sketch", "category": "Drawing" },
-    { "id": "4", "image": "", "caption": "Outfit Design", "category": "Fashion" },
-    { "id": "5", "image": "", "caption": "Story Excerpt", "category": "Writing" },
-    { "id": "6", "image": "", "caption": "More Art", "category": "Drawing" },
-    { "id": "7", "image": "", "caption": "Art Process", "category": "Video" }
+    {
+      "id": "1",
+      "image": "",
+      "caption": "My Drawing",
+      "category": "Drawing"
+    },
+    {
+      "id": "2",
+      "image": "",
+      "caption": "Fashion Design",
+      "category": "Fashion"
+    },
+    {
+      "id": "3",
+      "image": "",
+      "caption": "Sketch",
+      "category": "Drawing"
+    },
+    {
+      "id": "4",
+      "image": "",
+      "caption": "Outfit Design",
+      "category": "Fashion"
+    },
+    {
+      "id": "5",
+      "image": "",
+      "caption": "Story Excerpt",
+      "category": "Writing"
+    },
+    {
+      "id": "6",
+      "image": "",
+      "caption": "More Art",
+      "category": "Drawing"
+    },
+    {
+      "id": "7",
+      "image": "",
+      "caption": "Art Process",
+      "category": "Video"
+    }
   ],
   "videos": [
-    { "id": "1", "youtubeId": "", "title": "My GRWM", "description": "Getting ready with me!" },
-    { "id": "2", "youtubeId": "", "title": "Room Tour", "description": "Come see my creative space!" }
+    {
+      "id": "1",
+      "youtubeId": "",
+      "title": "My GRWM",
+      "description": "Getting ready with me!"
+    },
+    {
+      "id": "2",
+      "youtubeId": "",
+      "title": "Room Tour",
+      "description": "Come see my creative space!"
+    }
   ],
   "personal": [
-    { "id": "1", "image": "", "title": "Meet My Dog!", "description": "This is my furry best friend. We go on adventures together and they're always there when I need a cuddle. The best listener ever!" },
-    { "id": "2", "image": "", "title": "My Stories", "description": "Just me being me — hanging out, making memories, and having the best time with friends and family. Every day is a new chapter!" }
+    {
+      "id": "1",
+      "image": "assets/images/personal/personal-1777782739355.jpg",
+      "title": "Meet My Dog!",
+      "description": "This is my furry best friend. We go on adventures together and they're always there when I need a cuddle. The best listener ever!"
+    },
+    {
+      "id": "2",
+      "image": "",
+      "title": "My Stories",
+      "description": "Just me being me â hanging out, making memories, and having the best time with friends and family. Every day is a new chapter!"
+    }
   ],
   "hero": {
     "backgroundImage": "https://i.pinimg.com/1200x/a2/42/04/a242047094fdaa33068d6246f000f300.jpg"
