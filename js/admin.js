@@ -7,6 +7,9 @@
   var contentData = null;
   var contentSha = '';
 
+  // Local preview URLs so images show immediately after upload
+  var previews = {};
+
   // --- GitHub API ---
 
   function apiGet(path) {
@@ -76,6 +79,12 @@
       reader.onerror = function () { reject(new Error('Failed to read file')); };
       reader.readAsDataURL(file);
     });
+  }
+
+  // Get display URL — use local preview if available, otherwise deployed path
+  function displayUrl(path) {
+    if (previews[path]) return previews[path];
+    return path;
   }
 
   // --- Toast ---
@@ -165,6 +174,7 @@
   function logout() {
     localStorage.removeItem('jackie_admin_token');
     token = '';
+    previews = {};
     document.getElementById('appWrapper').classList.remove('active');
     document.getElementById('loginWrapper').style.display = '';
     document.getElementById('tokenInput').value = '';
@@ -186,9 +196,13 @@
     if (!contentData.gallery) contentData.gallery = [];
 
     container.innerHTML = contentData.gallery.map(function (item, i) {
-      var thumb = item.image
-        ? '<img src="' + esc(item.image) + '" alt="">'
+      var src = item.image ? displayUrl(item.image) : '';
+      var thumb = src
+        ? '<img src="' + esc(src) + '" alt="">'
         : '<span class="placeholder-icon">🖼</span>';
+      var uploadContent = src
+        ? '<img src="' + esc(src) + '" alt="">'
+        : '<div class="upload-icon">📷</div><div class="upload-text">Tap to upload image</div>';
       return '<div class="item-card">' +
         '<div class="item-card-header">' +
         '<div class="item-card-thumb">' + thumb + '</div>' +
@@ -211,8 +225,8 @@
         '<option' + (item.category === 'Other' ? ' selected' : '') + '>Other</option>' +
         '</select>' +
         '</div>' +
-        '<div class="upload-area' + (item.image ? ' has-image' : '') + '" data-gallery-upload="' + i + '">' +
-        (item.image ? '<img src="' + esc(item.image) + '" alt="">' : '<div class="upload-icon">📷</div><div class="upload-text">Tap to upload image</div>') +
+        '<div class="upload-area' + (src ? ' has-image' : '') + '" data-gallery-upload="' + i + '">' +
+        uploadContent +
         '<input type="file" accept="image/*" style="display:none" data-gallery-file="' + i + '">' +
         '</div>' +
         '<div class="item-card-actions">' +
@@ -240,12 +254,23 @@
         if (!file) return;
         var idx = parseInt(this.dataset.galleryFile);
         var filename = 'gallery-' + Date.now() + '.jpg';
+        var imagePath = 'assets/images/gallery/' + filename;
+
+        // Show local preview immediately
+        var localUrl = URL.createObjectURL(file);
+        previews[imagePath] = localUrl;
+        contentData.gallery[idx].image = imagePath;
+        renderGallery();
+
         toast('Uploading image...', 'info');
-        uploadImage('assets/images/gallery/' + filename, file, 'Upload gallery image').then(function () {
-          contentData.gallery[idx].image = 'assets/images/gallery/' + filename;
-          toast('Image uploaded!', 'success');
+        uploadImage(imagePath, file, 'Upload gallery image').then(function () {
+          toast('Image uploaded! Tap Save to publish.', 'success');
+        }).catch(function () {
+          delete previews[imagePath];
+          contentData.gallery[idx].image = '';
           renderGallery();
-        }).catch(function () { toast('Upload failed', 'error'); });
+          toast('Upload failed', 'error');
+        });
       });
     });
 
@@ -390,9 +415,13 @@
     if (!contentData.personal) contentData.personal = [];
 
     container.innerHTML = contentData.personal.map(function (card, i) {
-      var thumb = card.image
-        ? '<img src="' + esc(card.image) + '" alt="">'
+      var src = card.image ? displayUrl(card.image) : '';
+      var thumb = src
+        ? '<img src="' + esc(src) + '" alt="">'
         : '<span class="placeholder-icon">📷</span>';
+      var uploadContent = src
+        ? '<img src="' + esc(src) + '" alt="">'
+        : '<div class="upload-icon">📷</div><div class="upload-text">Tap to upload image</div>';
       return '<div class="item-card">' +
         '<div class="item-card-header">' +
         '<div class="item-card-thumb">' + thumb + '</div>' +
@@ -405,8 +434,8 @@
         '<label>Description</label>' +
         '<textarea data-personal="' + i + '" data-field="description" rows="3">' + esc(card.description) + '</textarea>' +
         '</div>' +
-        '<div class="upload-area' + (card.image ? ' has-image' : '') + '" data-personal-upload="' + i + '">' +
-        (card.image ? '<img src="' + esc(card.image) + '" alt="">' : '<div class="upload-icon">📷</div><div class="upload-text">Tap to upload image</div>') +
+        '<div class="upload-area' + (src ? ' has-image' : '') + '" data-personal-upload="' + i + '">' +
+        uploadContent +
         '<input type="file" accept="image/*" style="display:none" data-personal-file="' + i + '">' +
         '</div>' +
         '<div class="item-card-actions">' +
@@ -433,12 +462,23 @@
         if (!file) return;
         var idx = parseInt(this.dataset.personalFile);
         var filename = 'personal-' + Date.now() + '.jpg';
+        var imagePath = 'assets/images/personal/' + filename;
+
+        // Show local preview immediately
+        var localUrl = URL.createObjectURL(file);
+        previews[imagePath] = localUrl;
+        contentData.personal[idx].image = imagePath;
+        renderPersonal();
+
         toast('Uploading image...', 'info');
-        uploadImage('assets/images/personal/' + filename, file, 'Upload personal image').then(function () {
-          contentData.personal[idx].image = 'assets/images/personal/' + filename;
-          toast('Image uploaded!', 'success');
+        uploadImage(imagePath, file, 'Upload personal image').then(function () {
+          toast('Image uploaded! Tap Save to publish.', 'success');
+        }).catch(function () {
+          delete previews[imagePath];
+          contentData.personal[idx].image = '';
           renderPersonal();
-        }).catch(function () { toast('Upload failed', 'error'); });
+          toast('Upload failed', 'error');
+        });
       });
     });
 
