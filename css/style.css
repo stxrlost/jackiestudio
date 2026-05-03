@@ -4,15 +4,15 @@
 
 /* --- Design Tokens --- */
 :root {
-  --color-sky: #89CFF0;
-  --color-ocean-light: #48CAE4;
-  --color-ocean: #00B4D8;
-  --color-ocean-deep: #0077B6;
+  --color-sky: #9FBFB5;
+  --color-ocean-light: #77ACA2;
+  --color-ocean: #468189;
+  --color-ocean-deep: #2D5F65;
 
-  --color-sand: #FAEBD7;
-  --color-sand-light: #FFF8F0;
-  --color-shell: #FFE5D9;
-  --color-coral: #FF8FA3;
+  --color-sand: #F4E9CD;
+  --color-sand-light: #FBF7ED;
+  --color-shell: #FFCEC2;
+  --color-coral: #FFCEC2;
 
   --color-white: #FFFFFF;
   --color-text: #2B2D42;
